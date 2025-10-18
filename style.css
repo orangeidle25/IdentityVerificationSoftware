@@ -1,0 +1,622 @@
+/* Base styles and imports */
+:root {
+    --main-black: #1d1d1d; 
+    --gray-text: #525252;
+    --dark-text: #1d1d1d;
+    --light-bg: #ffffff;
+    --border-color: #e0e0e0;
+    --main-blue: #635bff; 
+    --success-green: #28a745; 
+    --warning-yellow: #ffc107; 
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* --- Common Modal/Screen Styles --- */
+
+.hidden {
+    display: none !important;
+}
+
+/* Overlays (for all seven modals) */
+.verification-modal-overlay,
+.verification-details-modal-overlay,
+.scan-id-screen-container,
+.id-capture-modal-overlay,
+.selfie-modal-overlay,
+.success-modal-overlay,
+.decline-modal-overlay { 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+/* First Modal (Wider) */
+.verification-modal {
+    background-color: var(--light-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 500px; 
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+/* Second Modal (Details) */
+.verification-details-modal {
+    background-color: var(--light-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+/* Third Screen Container (Get Ready) */
+.scan-id-content-wrapper {
+    background-color: var(--light-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 450px; 
+    height: auto; 
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* --- Fourth Screen: ID Capture Modal --- */
+.id-capture-modal {
+    background-color: var(--light-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 500px; 
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Progress Bar Styles */
+.progress-container {
+    width: 100%;
+    height: 3px;
+    background-color: var(--border-color);
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%; 
+    background-color: var(--main-black); 
+    transition: width 0.5s ease-in-out;
+}
+
+/* Content wrapper inside the 4th modal to handle padding */
+.id-capture-content {
+    padding: 0 25px 25px 25px; 
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Camera Preview for ID Check (4th Modal) */
+.camera-preview {
+    width: 100%;
+    max-width: 400px; 
+    height: 250px; 
+    background-color: black;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; 
+    padding-bottom: 20px;
+    box-sizing: border-box;
+    overflow: hidden; 
+}
+
+/* Video element styling for camera feed (ID Check) */
+#videoElement {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    transform: scaleX(-1); 
+}
+
+.shutter-button {
+    width: 60px;
+    height: 60px;
+    border: 3px solid white;
+    border-radius: 50%;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    outline: none; 
+    z-index: 5; 
+}
+.shutter-button:hover {
+    background-color: rgba(255, 255, 255, 0.2); 
+}
+
+
+/* --- FIFTH SCREEN: Selfie Check Modal --- */
+.selfie-modal {
+    background-color: var(--light-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 450px; 
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 25px;
+}
+
+.selfie-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.selfie-modal h2 {
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--dark-text);
+    margin: 0 0 10px 0;
+}
+
+.selfie-modal .instruction-text {
+    font-size: 16px;
+    color: var(--gray-text);
+    max-width: 300px;
+    margin-bottom: 30px;
+}
+
+.selfie-camera-preview {
+    width: 100%;
+    max-width: 350px; 
+    height: 400px; 
+    background-color: black;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; 
+    padding-bottom: 20px;
+    box-sizing: border-box;
+    overflow: hidden; 
+}
+
+/* Video element for Selfie Check */
+#selfieVideoElement {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    transform: scaleX(-1); 
+}
+
+/* Corner Brackets Overlay Styles */
+.corner-brackets-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; 
+    z-index: 4;
+    overflow: hidden;
+}
+
+.corner {
+    position: absolute;
+    width: 30px; 
+    height: 30px; 
+    border: 2px solid white; 
+}
+
+.corner.top-left {
+    top: 20%; 
+    left: 20%; 
+    border-right: none;
+    border-bottom: none;
+    border-top-left-radius: 5px;
+}
+
+.corner.top-right {
+    top: 20%;
+    right: 20%;
+    border-left: none;
+    border-bottom: none;
+    border-top-right-radius: 5px;
+}
+
+.corner.bottom-left {
+    bottom: 20%;
+    left: 20%;
+    border-right: none;
+    border-top: none;
+    border-bottom-left-radius: 5px;
+}
+
+.corner.bottom-right {
+    bottom: 20%;
+    right: 20%;
+    border-left: none;
+    border-top: none;
+    border-bottom-right-radius: 5px;
+}
+
+
+/* --- SIXTH SCREEN: Success Modal --- */
+.success-modal {
+    background-color: var(--light-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 400px; 
+    padding: 40px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.success-icon {
+    font-size: 60px;
+    color: var(--success-green);
+    margin-bottom: 20px;
+}
+
+.success-modal h2 {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--dark-text);
+    margin: 0 0 10px 0;
+}
+
+.success-modal p {
+    font-size: 16px;
+    color: var(--gray-text);
+    margin: 0;
+}
+
+#countdown {
+    font-weight: 600;
+    color: var(--main-black);
+}
+
+/* --- SEVENTH SCREEN: Decline Modal --- */
+.decline-modal {
+    background-color: var(--light-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 450px; 
+    padding: 30px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.decline-icon {
+    font-size: 40px;
+    color: var(--warning-yellow);
+    margin-bottom: 20px;
+}
+
+.decline-modal h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--dark-text);
+    margin: 0 0 15px 0;
+}
+
+.decline-modal p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--gray-text);
+    margin: 0 0 15px 0;
+}
+
+.decline-modal p strong {
+    color: var(--main-black);
+    font-weight: 700;
+}
+
+.decline-buttons {
+    width: 100%;
+    margin-top: 15px;
+}
+
+
+/* --- Logo and Header Styles (Modals 1, 2, 3) --- */
+
+.modal-header { text-align: center; margin-bottom: 24px; }
+.logo-container { margin-bottom: 20px; }
+
+/* Logo Placeholder Styling */
+.logo-placeholder {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--light-bg);
+    position: relative;
+    box-shadow: 0 0 0 1px var(--border-color);
+}
+.logo-icon-store {
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: var(--light-bg);
+    z-index: 2;
+    color: var(--dark-text);
+    font-size: 14px;
+    box-shadow: 0 0 0 1px var(--border-color);
+}
+.main-logo-image {
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: contain;
+    background-color: var(--main-black);
+    padding: 5px;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--dark-text);
+    line-height: 1.3;
+    margin: 0;
+}
+
+/* Modal 1 Steps */
+.modal-content { margin-bottom: 25px; }
+.verification-step {
+    display: flex; 
+    align-items: flex-start;
+    margin-bottom: 18px;
+}
+.verification-step .icon {
+    font-size: 16px; 
+    color: var(--dark-text);
+    margin-right: 12px;
+    margin-top: 2px;
+}
+.verification-step p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--gray-text);
+    margin: 0;
+}
+
+/* --- Links --- */
+.link-text {
+    color: var(--main-black); 
+    text-decoration: none;
+    font-weight: 500;
+}
+.link-text:hover { text-decoration: underline; }
+.underline { text-decoration: underline; }
+
+.modal-footer .link-text {
+    color: var(--gray-text); 
+    font-weight: 400;
+}
+.modal-footer .link-text:hover {
+    text-decoration: underline;
+    color: var(--dark-text);
+}
+
+.id-capture-modal .link-text, .selfie-modal .link-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--dark-text);
+    text-decoration: underline;
+}
+.id-capture-modal .link-text:hover, .selfie-modal .link-text:hover {
+    color: var(--gray-text);
+}
+
+/* --- Footer and Buttons (First Modal) --- */
+.modal-footer { text-align: center; }
+.privacy-links {
+    font-size: 14px;
+    color: var(--gray-text);
+    margin-bottom: 15px; 
+}
+
+
+/* --- Second Modal Details Steps --- */
+.details-modal-content h2 {
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--dark-text);
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+.details-step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
+.details-icon {
+    font-size: 18px;
+    color: var(--dark-text);
+    margin-right: 15px;
+    margin-top: 2px;
+}
+.details-step h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--dark-text);
+    margin: 0 0 5px 0;
+}
+.details-step p {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--gray-text);
+    margin: 0;
+}
+
+/* --- Third Screen Header/Content --- */
+.scan-id-header {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    flex-shrink: 0;
+}
+.back-arrow-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: var(--dark-text);
+    cursor: pointer;
+    padding: 5px;
+}
+.scan-id-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.header-logo-image {
+    width: 30px; 
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--main-black);
+    padding: 3px;
+    box-sizing: border-box;
+}
+.scan-id-content {
+    text-align: center;
+    padding: 40px 30px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    flex-grow: 1; 
+}
+.scan-id-content h2 {
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--dark-text);
+    margin: 0 0 10px 0;
+}
+.instruction-text {
+    font-size: 16px;
+    color: var(--gray-text);
+    max-width: 300px;
+    margin-bottom: 50px;
+}
+.id-icon-placeholder {
+    font-size: 80px;
+    color: var(--dark-text);
+    padding: 30px;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    display: inline-block;
+}
+.scan-id-footer {
+    padding: 20px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05); 
+    flex-shrink: 0;
+}
+
+
+/* --- Button Styles (Shared) --- */
+.btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    border: none;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Primary buttons (Black) */
+.btn-primary, 
+.btn-details-back,
+.btn-full-width { 
+    background-color: var(--main-black);
+    color: var(--light-bg);
+}
+.btn-primary:hover, 
+.btn-details-back:hover,
+.btn-full-width:hover {
+    background-color: #000000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* Secondary button (White) */
+.btn-secondary {
+    background-color: var(--light-bg);
+    color: var(--gray-text);
+    border: 1px solid var(--border-color);
+}
+.btn-secondary:hover { background-color: #f8f8f8; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); }
+
+/* Ensure correct spacing for stacked buttons in first and decline modals */
+.verification-modal .btn-primary { margin-bottom: 10px; }
+.verification-modal .btn-secondary { margin-bottom: 0; }
+.decline-buttons .btn-secondary { margin-bottom: 10px; }
+.decline-buttons .btn-primary { margin-bottom: 0; }
+
+.btn:active { transform: none; box-shadow: none; }
+.language-selector { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); text-align: center; } /* <-- MODIFIED CLASS */
+.language-selector a { color: black; text-decoration: none; padding: 0 5px; } /* <-- MODIFIED CLASS */
+.language-selector a.active { text-decoration: underline; } /* <-- MODIFIED CLASS */

